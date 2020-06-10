@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище LibraryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookPlaceSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDLibrarian" Type="int" Nullable="false" />
+          <Property Name="IDBook" Type="int" Nullable="false" />
+          <Property Name="IDReader" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BooksSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar(max)" />
+          <Property Name="Year" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LibrarianSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="DoB" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ReaderSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_BookPlaceSet_BooksSet">
+          <End Role="BooksSet" Type="Self.BooksSet" Multiplicity="1" />
+          <End Role="BookPlaceSet" Type="Self.BookPlaceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BooksSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookPlaceSet">
+              <PropertyRef Name="IDBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookPlaceSet_LibrarianSet">
+          <End Role="LibrarianSet" Type="Self.LibrarianSet" Multiplicity="1" />
+          <End Role="BookPlaceSet" Type="Self.BookPlaceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibrarianSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookPlaceSet">
+              <PropertyRef Name="IDLibrarian" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookPlaceSet_ReaderSet">
+          <End Role="ReaderSet" Type="Self.ReaderSet" Multiplicity="1" />
+          <End Role="BookPlaceSet" Type="Self.BookPlaceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReaderSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookPlaceSet">
+              <PropertyRef Name="IDReader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище LibraryModelContainer">
+          <EntitySet Name="BookPlaceSet" EntityType="Self.BookPlaceSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BooksSet" EntityType="Self.BooksSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LibrarianSet" EntityType="Self.LibrarianSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReaderSet" EntityType="Self.ReaderSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookPlaceSet_BooksSet" Association="Self.FK_BookPlaceSet_BooksSet">
+            <End Role="BooksSet" EntitySet="BooksSet" />
+            <End Role="BookPlaceSet" EntitySet="BookPlaceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookPlaceSet_LibrarianSet" Association="Self.FK_BookPlaceSet_LibrarianSet">
+            <End Role="LibrarianSet" EntitySet="LibrarianSet" />
+            <End Role="BookPlaceSet" EntitySet="BookPlaceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookPlaceSet_ReaderSet" Association="Self.FK_BookPlaceSet_ReaderSet">
+            <End Role="ReaderSet" EntitySet="ReaderSet" />
+            <End Role="BookPlaceSet" EntitySet="BookPlaceSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookPlaceSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDLibrarian" Type="Int32" Nullable="false" />
+          <Property Name="IDBook" Type="Int32" Nullable="false" />
+          <Property Name="IDReader" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BooksSet" Relationship="Self.FK_BookPlaceSet_BooksSet" FromRole="BookPlaceSet" ToRole="BooksSet" />
+          <NavigationProperty Name="LibrarianSet" Relationship="Self.FK_BookPlaceSet_LibrarianSet" FromRole="BookPlaceSet" ToRole="LibrarianSet" />
+          <NavigationProperty Name="ReaderSet" Relationship="Self.FK_BookPlaceSet_ReaderSet" FromRole="BookPlaceSet" ToRole="ReaderSet" />
+        </EntityType>
+        <EntityType Name="BooksSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookPlaceSet" Relationship="Self.FK_BookPlaceSet_BooksSet" FromRole="BooksSet" ToRole="BookPlaceSet" />
+        </EntityType>
+        <EntityType Name="LibrarianSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookPlaceSet" Relationship="Self.FK_BookPlaceSet_LibrarianSet" FromRole="LibrarianSet" ToRole="BookPlaceSet" />
+        </EntityType>
+        <EntityType Name="ReaderSet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookPlaceSet" Relationship="Self.FK_BookPlaceSet_ReaderSet" FromRole="ReaderSet" ToRole="BookPlaceSet" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_BookPlaceSet_BooksSet">
+          <End Role="BooksSet" Type="Self.BooksSet" Multiplicity="1" />
+          <End Role="BookPlaceSet" Type="Self.BookPlaceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BooksSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookPlaceSet">
+              <PropertyRef Name="IDBook" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookPlaceSet_LibrarianSet">
+          <End Role="LibrarianSet" Type="Self.LibrarianSet" Multiplicity="1" />
+          <End Role="BookPlaceSet" Type="Self.BookPlaceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibrarianSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookPlaceSet">
+              <PropertyRef Name="IDLibrarian" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookPlaceSet_ReaderSet">
+          <End Role="ReaderSet" Type="Self.ReaderSet" Multiplicity="1" />
+          <End Role="BookPlaceSet" Type="Self.BookPlaceSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReaderSet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookPlaceSet">
+              <PropertyRef Name="IDReader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookPlaceSet" EntityType="Self.BookPlaceSet" />
+          <EntitySet Name="BooksSet" EntityType="Self.BooksSet" />
+          <EntitySet Name="LibrarianSet" EntityType="Self.LibrarianSet" />
+          <EntitySet Name="ReaderSet" EntityType="Self.ReaderSet" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_BookPlaceSet_BooksSet" Association="Self.FK_BookPlaceSet_BooksSet">
+            <End Role="BooksSet" EntitySet="BooksSet" />
+            <End Role="BookPlaceSet" EntitySet="BookPlaceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookPlaceSet_LibrarianSet" Association="Self.FK_BookPlaceSet_LibrarianSet">
+            <End Role="LibrarianSet" EntitySet="LibrarianSet" />
+            <End Role="BookPlaceSet" EntitySet="BookPlaceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookPlaceSet_ReaderSet" Association="Self.FK_BookPlaceSet_ReaderSet">
+            <End Role="ReaderSet" EntitySet="ReaderSet" />
+            <End Role="BookPlaceSet" EntitySet="BookPlaceSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище LibraryModelContainer" CdmEntityContainer="LibraryEntities1">
+          <EntitySetMapping Name="BookPlaceSet">
+            <EntityTypeMapping TypeName="LibraryModel.BookPlaceSet">
+              <MappingFragment StoreEntitySet="BookPlaceSet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDLibrarian" ColumnName="IDLibrarian" />
+                <ScalarProperty Name="IDBook" ColumnName="IDBook" />
+                <ScalarProperty Name="IDReader" ColumnName="IDReader" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BooksSet">
+            <EntityTypeMapping TypeName="LibraryModel.BooksSet">
+              <MappingFragment StoreEntitySet="BooksSet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibrarianSet">
+            <EntityTypeMapping TypeName="LibraryModel.LibrarianSet">
+              <MappingFragment StoreEntitySet="LibrarianSet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReaderSet">
+            <EntityTypeMapping TypeName="LibraryModel.ReaderSet">
+              <MappingFragment StoreEntitySet="ReaderSet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LibraryModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

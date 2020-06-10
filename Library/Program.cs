@@ -8,6 +8,7 @@ namespace Library
 {
     static class Program
     {
+        public static LibraryEntities1 qwer = new LibraryEntities1();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -16,7 +17,7 @@ namespace Library
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormAuthorization());
         }
     }
 }
